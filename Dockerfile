@@ -1,4 +1,4 @@
-FROM node:13-alpine3.11
+FROM node:alpine3.11
 WORKDIR /var/www/html
 COPY . /var/www/html
 RUN yarn install --silent

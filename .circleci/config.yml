@@ -12,7 +12,7 @@ jobs:
           command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
       - run:
           name: Build laravel docker image
-          command: docker build -t ${PROPERTY}/web:${CIRCLE_SHA1} .
+          command: docker build -t ${DOCKER_USER}/web:${CIRCLE_SHA1} .
       - run:
           name: Push to DockerHub account
           command: docker push ${DOCKER_USER}/web:${CIRCLE_SHA1}

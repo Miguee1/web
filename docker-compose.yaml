@@ -1,0 +1,16 @@
+version: '3.4'
+
+# x-common-variables: &common-variables
+#   DB_NAME: warehouse
+#   DB_USR: 'user'
+#   DB_PWD: '12345'
+
+services:
+
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"

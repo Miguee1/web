@@ -1,0 +1,8 @@
+node_modules/
+npm-debug.log
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
+docker-compose.yaml
+docker-compose.override.yaml
+Dockerfile

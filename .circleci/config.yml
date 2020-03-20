@@ -15,5 +15,5 @@ jobs:
           command: docker build -t ${PROPERTY}/web:${CIRCLE_SHA1} .
       - run:
           name: Push to DockerHub account
-          command: docker push ${PROPERTY}/web:${CIRCLE_SHA1}
+          command: docker push ${DOCKER_USER}/web:${CIRCLE_SHA1}
       # - run: ssh -o StrictHostKyeChecking=no root@host.co "/bin/bash /root/docker/deploy.sh $CIRCLE_SHA1"

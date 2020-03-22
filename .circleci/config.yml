@@ -9,7 +9,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Install Packages
-          command: yarn test
+          command: yarn install
       - run:
           name: Running Unit Test
           command: yarn test

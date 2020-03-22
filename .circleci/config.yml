@@ -9,7 +9,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Running Unit Test
-          command: yarn test
+          command: npm test
       - run:
           name: Login docker hub
           command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}

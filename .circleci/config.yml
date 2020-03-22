@@ -8,6 +8,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Running Unit Test
+          command: yarn test
+      - run:
           name: Login docker hub
           command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
       - run:
@@ -17,3 +20,14 @@ jobs:
           name: Push to DockerHub account
           command: docker push ${DOCKER_USER}/web:${CIRCLE_SHA1}
       # - run: ssh -o StrictHostKyeChecking=no root@host.co "/bin/bash /root/docker/deploy.sh $CIRCLE_SHA1"
+# workflows:
+#   version: 2
+#   build-deploy:
+#     jobs:
+#       - build-job 
+#       - deploy-job:
+#           requires:
+#             - build-job # Only deploy once the build job has completed
+#           filters:
+#             branches:
+#               only: master # Only deploy on the master branch

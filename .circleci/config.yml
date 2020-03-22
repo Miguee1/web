@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-     - image: circleci/python:2-jessie-browsers
+     - image: circleci/node:13-apine
     steps:
       - checkout
       - setup_remote_docker

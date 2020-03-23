@@ -48,11 +48,9 @@ jobs:
 
 workflows:
   version: 2
-  ci:
+  build_and_deploy:
     jobs:
       - developer
-  cd:
-    jobs:
       - staging:
           requires:
             - developer

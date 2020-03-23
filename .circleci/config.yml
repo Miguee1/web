@@ -16,7 +16,7 @@ jobs:
 
   staging:
     working_directory: ~/repo
-    docker: # run the steps with Docker
+    docker:
       - image: circleci/node:latest-browsers-legacy
     steps:
       # - add_ssh_keys:
@@ -37,7 +37,7 @@ jobs:
   
   production:
     working_directory: ~/repo
-    docker: # run the steps with Docker
+    docker:
       - image: circleci/node:latest-browsers-legacy
     steps:
       # - add_ssh_keys:

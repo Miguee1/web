@@ -1,69 +1,13 @@
-version: 2
-jobs:
-
-  developer:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:latest-browsers-legacy
-    steps:
-      - checkout
-      - run:
-          name: Install Packages
-          command: yarn install
-      - run:
-          name: Running Unit Test
-          command: yarn test
-
-  staging:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:latest-browsers-legacy
-    steps:
-      # - add_ssh_keys:
-      #     fingerprints:
-      #       - "54:ba:e5:53:bb:01:e9:d9:31:63:3b:d0:22:4e:6a:7b"
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Login docker hub
-          command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-      - run:
-          name: Build React docker image
-          command: docker build -t ${DOCKER_USER}/web:${CIRCLE_SHA1} .
-      - run:
-          name: Push to DockerHub account
-          command: docker push ${DOCKER_USER}/web:${CIRCLE_SHA1}
-      # - run: ssh -o StrictHostKyeChecking=no root@host.co "/bin/bash /root/docker/deploy.sh $CIRCLE_SHA1"
-  
-  production:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:latest-browsers-legacy
-    steps:
-      # - add_ssh_keys:
-      #     fingerprints:
-      #       - "54:ba:e5:53:bb:01:e9:d9:31:63:3b:d0:22:4e:6a:7b"
-      - checkout
-      - setup_remote_docker
-
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+orbs:
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+# Orchestrate or schedule a set of jobs
 workflows:
-  version: 2
-  build_and_deploy:
+  # Name the workflow "welcome"
+  welcome:
+    # Run the welcome/run job in its own container
     jobs:
-      - developer
-      - staging:
-          requires:
-            - developer
-          context: development
-          filters:
-            branches:
-              only:
-                - development
-      - production:
-          requires:
-            - developer
-          context: production
-          filters:
-            branches:
-              only:
-                - master
+      - welcome/run

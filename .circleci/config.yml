@@ -59,6 +59,7 @@ workflows:
   
   deploy:
     jobs:
+      - developer
       - staging:
           requires:
             - developer

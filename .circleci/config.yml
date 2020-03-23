@@ -3,7 +3,7 @@ jobs:
 
   developer:
     working_directory: ~/repo
-    docker: # run the steps with Docker
+    docker:
       - image: circleci/node:latest-browsers-legacy
     steps:
       - checkout
@@ -45,7 +45,7 @@ jobs:
       #       - "54:ba:e5:53:bb:01:e9:d9:31:63:3b:d0:22:4e:6a:7b"
       - checkout
       - setup_remote_docker
-      
+
 workflows:
   version: 2
   cd:
